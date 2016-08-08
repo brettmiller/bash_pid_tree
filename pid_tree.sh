@@ -2,9 +2,9 @@
 #
 # Display the parent process tree for a given process
 
-M_PPID=$1
 
 pidtree () {
+  M_PPID=$1
   COUNT=0
   while [ "$M_PPID" != "1" ] ; do
     #WPID_INFO=($( ps -p $M_PPID -o pid= -o ppid= -o ruser= -o cmd= ))
@@ -28,4 +28,4 @@ pidtree () {
   echo "$PID_TREE"
 }
 
-pidtree
+pidtree $1
