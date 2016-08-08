@@ -1,6 +1,7 @@
 #!/bin/bash
 #
 # Display the parent process tree for a given process
+# in a single line
 
 
 pidtree () {
