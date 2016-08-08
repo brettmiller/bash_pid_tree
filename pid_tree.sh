@@ -2,8 +2,7 @@
 #
 # Display the parent process tree for a given process
 
-M_PPID=$(sudo ss --packet -apn | grep users: | cut -d, -f2)
-#M_PPID=$1
+M_PPID=$1
 
 COUNT=0
 
