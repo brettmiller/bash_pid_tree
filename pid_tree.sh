@@ -8,9 +8,7 @@ pidtree () {
   M_PPID=$1
   COUNT=0
   while [ "$M_PPID" != "1" ] ; do
-    #WPID_INFO=($( ps -p $M_PPID -o pid= -o ppid= -o ruser= -o cmd= ))
     WPID_INFO="$( ps -p $M_PPID -o pid= -o ppid= -o ruser= -o cmd= )"
-    #WPID_INFO="$( ps -p "$M_PPID" --no-headers -o "%p;%P;%a;%u")"
     PID_INFO=(${WPID_INFO})
     M_PPID="${PID_INFO[1]}"
     PROC_LIST[${COUNT}]="${PID_INFO[3]},${PID_INFO[0]},${PID_INFO[2]}"
