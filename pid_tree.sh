@@ -16,13 +16,13 @@ while [ "$M_PPID" != "1" ] ; do
   let COUNT=$COUNT+1
 done
 
-PROC_TREE=''
+PID_TREE=''
 while [ $COUNT -ge 0 ] ; do
-  PROC_TREE="${PROC_TREE}${PROC_LIST[${COUNT}]} ->"
+  PID_TREE="${PID_TREE}${PROC_LIST[${COUNT}]} ->"
   let COUNT=$COUNT-1
 done
 
 # Strip leading and trailing '->'
-PROC_TREE=${PROC_TREE# ->}
-PROC_TREE=${PROC_TREE%->}
-echo "$PROC_TREE"
+PID_TREE=${PID_TREE# ->}
+PID_TREE=${PID_TREE%->}
+echo "$PID_TREE"
