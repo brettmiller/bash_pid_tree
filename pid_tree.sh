@@ -7,8 +7,6 @@ M_PPID=$(sudo ss --packet -apn | grep users: | cut -d, -f2)
 
 COUNT=0
 
-OIFS=$IFS
-#IFS=";"
 while [ "$M_PPID" != "1" ] ; do
   #WPID_INFO=($( ps -p $M_PPID -o pid= -o ppid= -o ruser= -o cmd= ))
   WPID_INFO="$( ps -p $M_PPID -o pid= -o ppid= -o ruser= -o cmd= )"
@@ -18,7 +16,6 @@ while [ "$M_PPID" != "1" ] ; do
   PROC_LIST[${COUNT}]="${PID_INFO[3]},${PID_INFO[0]},${PID_INFO[2]}"
   let COUNT=$COUNT+1
 done
-IFS=$OIFS
 
 PROC_TREE=''
 while [ $COUNT -ge 0 ] ; do
@@ -27,5 +24,6 @@ while [ $COUNT -ge 0 ] ; do
 done
 
 # Strip leading and trailing '->'
-PROC_TREE=$(echo $PROC_TREE | sed -e 's/^->\(.*\)->$/\1/')
+PROC_TREE=${PROC_TREE# ->}
+PROC_TREE=${PROC_TREE%->}
 echo "$PROC_TREE"
