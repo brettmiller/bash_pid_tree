@@ -16,22 +16,24 @@ pidtree () {
       PID_INFO=(${WPID_INFO})
       # set to parent pid for next loop.
       M_PPID="${PID_INFO[1]}"
-      PROC_LIST[${COUNT}]="${PID_INFO[3]},${PID_INFO[0]},${PID_INFO[2]}"
+      PROC_LIST[${COUNT}]="${PID_INFO[@]:3:${#PID_INFO[@]}},${PID_INFO[0]},${PID_INFO[2]}"
       let COUNT=$COUNT+1
     done
 
+    # create tree
     PID_TREE=''
     while [ $COUNT -ge 0 ] ; do
       PID_TREE="${PID_TREE}${PROC_LIST[${COUNT}]} ->"
       let COUNT=$COUNT-1
     done
-
     # Strip leading and trailing '->'
     PID_TREE=${PID_TREE# ->}
     PID_TREE=${PID_TREE%->}
     echo "$PID_TREE"
   else
+    # report
     1>&2 echo "${M_PPID:=PID} not found."
+    exit 1
   fi
 }
 
